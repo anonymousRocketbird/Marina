@@ -2,7 +2,7 @@
 
 This repository contains material accompanying the paper **Marina: Realizing ML-driven Real-time Network Traffic Monitoring at Terabit Scale** submitted for review to SIGCOMM'23.
 
-Contained are the implementations of the p4 program designed for the Tofino 1 platform as well as the data plane controller. Porting the p4 code for the Tofino 2 platform is currently in progress.
+Contained are the implementations of the p4 program designed for the Tofino 1 platform as well as the data plane controller.
 
 ## Prerequisites
 - bf-sde version 8.9
