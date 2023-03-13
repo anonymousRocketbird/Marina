@@ -77,5 +77,5 @@ You can build a release or a debug build, adjust the commands accordingly. (The 
 ## Running
 Make sure you are in ~/sde (this needs to be your working dir, to load the controller)
 
-- `./run_switchd.sh -p qoe_switch`
+- `./run_switchd.sh -p marina_data_plane.p4`
 
