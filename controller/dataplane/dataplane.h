@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <netinet/ip6.h>
 #include <pipe_mgr/pipe_mgr_intf.h>
-#include <tofinopd/qoe_switch/pd/pd.h>
+#include <tofinopd/marina_data_plane/pd/pd.h>
 #include "../logging/statistics.h"
 
 GLOBAL_STAT_HDR(dataplane_commands)

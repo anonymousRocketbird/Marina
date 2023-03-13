@@ -4,6 +4,7 @@
 #include <stdatomic.h>
 
 #include "hashes/MurmurHash3.h"
+#include "../runtime_config/runtime_config.h"
 
 session_hashtable_t session_hashtable;
 
@@ -43,7 +44,21 @@ void session_hashtable_init() {
 }
 
 static inline void session_hashtable_hash_key(const five_tuple_t *key, uint32_t *hash) {
-	MurmurHash3_x86_32(&key->sh, sizeof(five_tuple_for_session_hash_t), MURMUR_SEED, hash);
+	if (use_sessions()){
+		MurmurHash3_x86_32(&key->sh, sizeof(five_tuple_for_session_hash_t), MURMUR_SEED, hash);
+	}
+	else {
+		MurmurHash3_x86_32(&key->h, sizeof(five_tuple_for_hash_t), MURMUR_SEED, hash);
+	}
+}
+
+static inline int compare_five_tuples(const five_tuple_t *key1, const five_tuple_t *key2) {
+	if (use_sessions()) {
+		return memcmp(&key1->sh, &key2->sh, sizeof(five_tuple_for_session_hash_t));
+	}
+	else {
+		return memcmp(&key1->h, &key2->h, sizeof(five_tuple_for_hash_t));
+	}
 }
 
 /*
@@ -61,9 +76,11 @@ int session_hashtable_add_or_increase_flow_count(const five_tuple_t *key, const 
 //	LOCK(table);
 	while (session_hashtable.entries[index].occupied) {
 		if (session_hashtable.entries[index].hash == hash) {
-			if (memcmp(&session_hashtable.entries[index].key.sh, &key->sh, sizeof(five_tuple_for_session_hash_t)) == 0) {
-				// the same session already exists, this means we have a new flow for this session
-				session_hashtable.flow_count[value]++;
+			if (compare_five_tuples(&session_hashtable.entries[index].key, key) == 0) {
+				if (use_sessions()) {
+					// the same session already exists, this means we have a new flow for this session
+					session_hashtable.flow_count[value]++;
+				}
 				ret = 1;
 				break;
 			}
@@ -99,7 +116,7 @@ static inline int session_get_hashtable_index(const five_tuple_t *key, const uin
 		// If occupied and hash matches
 		if (session_hashtable.entries[*index].hash == hash) {
 			// check if the key also matches
-			if (memcmp(&session_hashtable.entries[*index].key.sh, &key->sh, sizeof(five_tuple_for_session_hash_t)) == 0) {
+			if (compare_five_tuples(&session_hashtable.entries[*index].key, key) == 0) {
 				return 0;
 			}
 		}
@@ -170,11 +187,13 @@ static void session_hashtable_remove_by_index(int32_t index, int32_t session_id)
  * Value can be NULL if it should be ignored.
  */
 int session_hashtable_remove_or_decrease_flow_count(const five_tuple_t *key, int32_t *value) {
-	session_hashtable.flow_count[*value]--;
+	if (use_sessions()) {
+		session_hashtable.flow_count[*value]--;
 
-	// we don't really want to remove sessions that still have active flows
-	if (session_hashtable.flow_count[*value] != 0)
-		return 1;
+		// we don't really want to remove sessions that still have active flows
+		if (session_hashtable.flow_count[*value] != 0)
+			return 1;
+	}
 
 	int32_t index;
 	int ret = 0;
@@ -195,11 +214,13 @@ int session_hashtable_remove_or_decrease_flow_count(const five_tuple_t *key, int
 }
 
 int session_hashtable_remove_or_decrease_flow_count_by_value(const int32_t value, five_tuple_t *key) {
-	session_hashtable.flow_count[value]--;
+	if (use_sessions()) {
+		session_hashtable.flow_count[value]--;
 
-	// we don't really want to remove sessions that still have active flows
-	if (session_hashtable.flow_count[value] != 0)
-		return 1;
+		// we don't really want to remove sessions that still have active flows
+		if (session_hashtable.flow_count[value] != 0)
+			return 1;
+	}
 
 	int ret = 0;
 //	LOCK(table);

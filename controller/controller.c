@@ -19,6 +19,7 @@
 #include "flow_db/flow_db.h"
 #include "export/export_features.h"
 #include "dns_db/dns_db.h"
+#include "runtime_config/runtime_config.h"
 
 #define THREAD_CREATE_OR_EXIT(st, fn)                                                  \
     DEBUG_LOG("starting thread " #fn)                                                  \
@@ -32,6 +33,8 @@
  * Prepares, starts and joins all threads
  */
 void low_level_controller() {
+	load_runtime_config();
+
 	DEBUG_LOG("Initializing global locks")
 	pthread_spin_init(&uuid_mapping_lock, 0);
 

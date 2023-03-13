@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include <tofinopd/qoe_switch/pd/pd.h>
+#include <tofinopd/marina_data_plane/pd/pd.h>
 #include <pipe_mgr/pipe_mgr_intf.h>
 #include <tofino/bf_pal/bf_pal_types.h>
 #include <tofino/pdfixed/pd_tm.h>
@@ -52,42 +52,42 @@ p4_pd_status_t p4_pd_tm_set_cpuport(p4_pd_tm_dev_t dev, p4_pd_tm_port_t port) { 
 
 pipe_status_t pipe_mgr_client_cleanup(pipe_sess_hdl_t def_sess_hdl) { return 0; }
 
-p4_pd_status_t p4_pd_qoe_switch_iat_compute_log_table_table_add_with_iat_compute_log_action
+p4_pd_status_t p4_pd_marina_data_plane_iat_compute_log_table_table_add_with_iat_compute_log_action
 		(
 				p4_pd_sess_hdl_t sess_hdl,
 				p4_pd_dev_target_t dev_tgt,
-				p4_pd_qoe_switch_iat_compute_log_table_match_spec_t *match_spec,
-				p4_pd_qoe_switch_iat_compute_log_action_action_spec_t *action_spec,
+				p4_pd_marina_data_plane_iat_compute_log_table_match_spec_t *match_spec,
+				p4_pd_marina_data_plane_iat_compute_log_action_action_spec_t *action_spec,
 				p4_pd_entry_hdl_t *entry_hdl
 		) { return 0; }
 
-p4_pd_status_t p4_pd_qoe_switch_compute_size_log_table_table_add_with_compute_size_log_action(
+p4_pd_status_t p4_pd_marina_data_plane_compute_size_log_table_table_add_with_compute_size_log_action(
 		p4_pd_sess_hdl_t sess_hdl,
 		p4_pd_dev_target_t dev_tgt,
-		p4_pd_qoe_switch_compute_size_log_table_match_spec_t *match_spec,
-		p4_pd_qoe_switch_compute_size_log_action_action_spec_t *action_spec,
+		p4_pd_marina_data_plane_compute_size_log_table_match_spec_t *match_spec,
+		p4_pd_marina_data_plane_compute_size_log_action_action_spec_t *action_spec,
 		p4_pd_entry_hdl_t *entry_hdl
 ) { return 0; }
 
-p4_pd_status_t p4_pd_qoe_switch_header_length_table_table_add_with_header_length_hit(
+p4_pd_status_t p4_pd_marina_data_plane_header_length_table_table_add_with_header_length_hit(
 		p4_pd_sess_hdl_t sess_hdl,
 		p4_pd_dev_target_t dev_tgt,
-		p4_pd_qoe_switch_header_length_table_match_spec_t *match_spec,
+		p4_pd_marina_data_plane_header_length_table_match_spec_t *match_spec,
 		int priority,
-		p4_pd_qoe_switch_header_length_hit_action_spec_t *action_spec,
+		p4_pd_marina_data_plane_header_length_hit_action_spec_t *action_spec,
 		p4_pd_entry_hdl_t *entry_hdl
 ) { return 0; }
 
-p4_pd_status_t p4_pd_qoe_switch_forward_table_table_add_with_forward_action(
+p4_pd_status_t p4_pd_marina_data_plane_forward_table_table_add_with_forward_action(
 		p4_pd_sess_hdl_t sess_hdl,
 		p4_pd_dev_target_t dev_tgt,
-		p4_pd_qoe_switch_forward_table_match_spec_t *match_spec,
-		p4_pd_qoe_switch_forward_action_action_spec_t *action_spec,
+		p4_pd_marina_data_plane_forward_table_match_spec_t *match_spec,
+		p4_pd_marina_data_plane_forward_action_action_spec_t *action_spec,
 		p4_pd_entry_hdl_t *entry_hdl
 ) { return 0; }
 
 #define MOCK_WRITE(name, type) \
-p4_pd_status_t p4_pd_qoe_switch_register_write_##name (       \
+p4_pd_status_t p4_pd_marina_data_plane_register_write_##name (       \
         p4_pd_sess_hdl_t sess_hdl ARG_UNUSED,                 \
         p4_pd_dev_target_t dev_tgt ARG_UNUSED,                \
         int index ARG_UNUSED,                                 \
@@ -97,7 +97,7 @@ p4_pd_status_t p4_pd_qoe_switch_register_write_##name (       \
 }
 
 #define MOCK_READ(name, type)                                      \
-p4_pd_status_t p4_pd_qoe_switch_register_range_read_##name (  \
+p4_pd_status_t p4_pd_marina_data_plane_register_range_read_##name (  \
         p4_pd_sess_hdl_t sess_hdl ARG_UNUSED,                 \
         p4_pd_dev_target_t dev_tgt ARG_UNUSED,                \
         int index ARG_UNUSED,                                 \
@@ -111,7 +111,7 @@ p4_pd_status_t p4_pd_qoe_switch_register_range_read_##name (  \
 }
 
 #define MOCK_RESET_ALL(name)                                  \
-p4_pd_status_t p4_pd_qoe_switch_register_reset_all_##name (   \
+p4_pd_status_t p4_pd_marina_data_plane_register_reset_all_##name (   \
         p4_pd_sess_hdl_t sess_hdl ARG_UNUSED,                 \
         p4_pd_dev_target_t dev_tgt ARG_UNUSED) {              \
     print("RESET" #name);                                     \
@@ -141,21 +141,21 @@ MOCK_REG(iat_log_cube_reg, uint32_t)
 MOCK_REG(ret_count_reg, uint32_t)
 
 #define MOCK_TABLE_GET_ENTRY_COUNT(name)\
-p4_pd_status_t p4_pd_qoe_switch_##name##_get_entry_count(\
+p4_pd_status_t p4_pd_marina_data_plane_##name##_get_entry_count(\
                 p4_pd_sess_hdl_t sess_hdl,\
                 p4_pd_dev_target_t dev_tgt,\
                 uint32_t *count \
         ) {*count = 0;return 0;}
 
 #define MOCK_TABLE_GET_FIRST_ENTRY_HANDLE(name)\
-p4_pd_status_t p4_pd_qoe_switch_##name##_get_first_entry_handle(\
+p4_pd_status_t p4_pd_marina_data_plane_##name##_get_first_entry_handle(\
                 p4_pd_sess_hdl_t sess_hdl,\
                 p4_pd_dev_target_t dev_tgt,\
                 int *index\
         ) {*index = 0;return 0;}
 
 #define MOCK_TABLE_GET_NEXT_ENTRY_HANDLES(name) \
-p4_pd_status_t p4_pd_qoe_switch_##name##_get_next_entry_handles( \
+p4_pd_status_t p4_pd_marina_data_plane_##name##_get_next_entry_handles( \
                 p4_pd_sess_hdl_t sess_hdl,\
                 p4_pd_dev_target_t dev_tgt,\
                 p4_pd_entry_hdl_t entry_handle,\
@@ -164,14 +164,14 @@ p4_pd_status_t p4_pd_qoe_switch_##name##_get_next_entry_handles( \
         ) {*next_entry_handles=0;return 0;}
 
 #define MOCK_TABLE_DELETE(name) \
-p4_pd_status_t p4_pd_qoe_switch_##name##_table_delete( \
+p4_pd_status_t p4_pd_marina_data_plane_##name##_table_delete( \
                 p4_pd_sess_hdl_t sess_hdl, \
                 uint8_t dev_id, \
                 p4_pd_entry_hdl_t entry_hdl \
         ) {return 0;}
 
 #define MOCK_TABLE_RESET_DEFAULT(name)\
-p4_pd_status_t p4_pd_qoe_switch_##name##_table_reset_default_entry(\
+p4_pd_status_t p4_pd_marina_data_plane_##name##_table_reset_default_entry(\
                 p4_pd_sess_hdl_t sess_hdl,\
                 p4_pd_dev_target_t pd_dev_tgt\
         ) {return 0;}
@@ -194,7 +194,7 @@ MOCK_TABLE(header_length_table)
 MOCK_TABLE(compute_size_log_table)
 
 #define MOCK_SET_PROPERTY(name) \
-p4_pd_status_t p4_pd_qoe_switch_##name##_set_property ( \
+p4_pd_status_t p4_pd_marina_data_plane_##name##_set_property ( \
                 p4_pd_sess_hdl_t sess_hdl, \
                 uint8_t dev_id, \
                 p4_pd_tbl_prop_type_t property, \
@@ -233,11 +233,11 @@ MOCK_SET_PROPERTY(classification_ipv6)
 #endif
 
 
-p4_pd_status_t p4_pd_qoe_switch_classification_ipv4_table_add_with_classification_hit_action(
+p4_pd_status_t p4_pd_marina_data_plane_classification_ipv4_table_add_with_classification_hit_action(
 		p4_pd_sess_hdl_t sess_hdl ARG_UNUSED,
 		p4_pd_dev_target_t dev_tgt ARG_UNUSED,
-		p4_pd_qoe_switch_classification_ipv4_match_spec_t *match_spec ARG_UNUSED,
-		p4_pd_qoe_switch_classification_hit_action_action_spec_t *action_spec ARG_UNUSED,
+		p4_pd_marina_data_plane_classification_ipv4_match_spec_t *match_spec ARG_UNUSED,
+		p4_pd_marina_data_plane_classification_hit_action_action_spec_t *action_spec ARG_UNUSED,
 		p4_pd_entry_hdl_t *entry_hdl) {
 	print("INSERT_IPV4");
 	*entry_hdl = 0;
@@ -245,11 +245,11 @@ p4_pd_status_t p4_pd_qoe_switch_classification_ipv4_table_add_with_classificatio
 }
 
 #ifdef ENABLE_IP6
-p4_pd_status_t p4_pd_qoe_switch_classification_ipv6_table_add_with_classification_hit_action(
+p4_pd_status_t p4_pd_marina_data_plane_classification_ipv6_table_add_with_classification_hit_action(
 		p4_pd_sess_hdl_t sess_hdl ARG_UNUSED,
 		p4_pd_dev_target_t dev_tgt ARG_UNUSED,
-		p4_pd_qoe_switch_classification_ipv6_match_spec_t *match_spec ARG_UNUSED,
-		p4_pd_qoe_switch_classification_hit_action_action_spec_t *action_spec ARG_UNUSED,
+		p4_pd_marina_data_plane_classification_ipv6_match_spec_t *match_spec ARG_UNUSED,
+		p4_pd_marina_data_plane_classification_hit_action_action_spec_t *action_spec ARG_UNUSED,
 		p4_pd_entry_hdl_t *entry_hdl) {
 	print("INSERT_IPV6");
 	*entry_hdl = 0;
@@ -257,7 +257,7 @@ p4_pd_status_t p4_pd_qoe_switch_classification_ipv6_table_add_with_classificatio
 }
 #endif
 
-p4_pd_status_t p4_pd_qoe_switch_classification_ipv4_table_delete(
+p4_pd_status_t p4_pd_marina_data_plane_classification_ipv4_table_delete(
 		p4_pd_sess_hdl_t sess_hdl ARG_UNUSED,
 		uint8_t dev_id ARG_UNUSED,
 		p4_pd_entry_hdl_t entry_hdl ARG_UNUSED) {
@@ -265,7 +265,7 @@ p4_pd_status_t p4_pd_qoe_switch_classification_ipv4_table_delete(
 	return 0;
 }
 
-p4_pd_status_t p4_pd_qoe_switch_classification_ipv6_table_delete(
+p4_pd_status_t p4_pd_marina_data_plane_classification_ipv6_table_delete(
 		p4_pd_sess_hdl_t sess_hdl ARG_UNUSED,
 		uint8_t dev_id ARG_UNUSED,
 		p4_pd_entry_hdl_t entry_hdl ARG_UNUSED) {
@@ -274,7 +274,7 @@ p4_pd_status_t p4_pd_qoe_switch_classification_ipv6_table_delete(
 }
 
 #define MOCK_WRITE_BLOOM(id)                                        \
-p4_pd_status_t p4_pd_qoe_switch_register_write_bloom_filter_##id (  \
+p4_pd_status_t p4_pd_marina_data_plane_register_write_bloom_filter_##id (  \
         p4_pd_sess_hdl_t sess_hdl ARG_UNUSED,                       \
         p4_pd_dev_target_t dev_tgt ARG_UNUSED,                      \
         int index ARG_UNUSED,                                       \

@@ -78,7 +78,7 @@ void *bench_classification_insert_remove(__attribute__((unused)) void *arg) {
 	}*/
 
 	uint32_t count;
-//	p4_pd_qoe_switch_classification_ipv4_get_entry_count(sess_hdl, ALL_PIPES, &count);
+//	p4_pd_marina_data_plane_classification_ipv4_get_entry_count(sess_hdl, ALL_PIPES, &count);
 //	ERROR_LOG("Number of entries: %u", count)
 
 // don't know where magic number 8192 is from, but there were 4098 entries less
@@ -95,7 +95,7 @@ void *bench_classification_insert_remove(__attribute__((unused)) void *arg) {
 			pipe_mgr_begin_batch(sess_hdl);
 			if (switch_add_classification_entry(&five_tuple, sess_hdl, i, &entry_hdls[i]) == ERR_SWITCH) {
 				pipe_mgr_end_batch(sess_hdl, true);
-				p4_pd_qoe_switch_classification_ipv4_get_entry_count(sess_hdl, ALL_PIPES, &count);
+				p4_pd_marina_data_plane_classification_ipv4_get_entry_count(sess_hdl, ALL_PIPES, &count);
 				ERROR_LOG("Number of entries: %u (%u)", count, i)
 				return NULL;
 			}
@@ -225,7 +225,7 @@ void *bench_bloom_filter(__attribute__((unused)) void *arg) {
 
 	pipe_mgr_begin_batch(sess_hdl);
 	for (int i = 0; i < BLOOM_FILTER_STRIDE; i++) {
-		p4_pd_qoe_switch_register_write_bloom_filter_1(
+		p4_pd_marina_data_plane_register_write_bloom_filter_1(
 				sess_hdl, PIPES[0], i, &set
 		);
 	}
@@ -239,10 +239,10 @@ void *bench_bloom_filter(__attribute__((unused)) void *arg) {
 		for (int j = 0; j < NUM_BENCH_BLOOM; j++) {
 			index++;
 			pipe_mgr_begin_batch(sess_hdl);
-			p4_pd_qoe_switch_register_write_bloom_filter_1(
+			p4_pd_marina_data_plane_register_write_bloom_filter_1(
 					sess_hdl, PIPES[0], (index) % BLOOMFILTER_WIDTH, &set
 			);
-			p4_pd_qoe_switch_register_write_bloom_filter_1(
+			p4_pd_marina_data_plane_register_write_bloom_filter_1(
 					sess_hdl, PIPES[0],
 					(index - BLOOM_FILTER_STRIDE) % BLOOMFILTER_WIDTH, &unset
 			);
@@ -318,7 +318,7 @@ void *bench_classification_remove_with_zero(__attribute__((unused)) void *arg) {
 			pipe_mgr_begin_batch(sess_hdl);
 			if (switch_add_classification_entry(&five_tuple, sess_hdl, i, &entry_hdls[i]) == ERR_SWITCH) {
 				pipe_mgr_end_batch(sess_hdl, true);
-				p4_pd_qoe_switch_classification_ipv4_get_entry_count(sess_hdl, ALL_PIPES, &count);
+				p4_pd_marina_data_plane_classification_ipv4_get_entry_count(sess_hdl, ALL_PIPES, &count);
 				ERROR_LOG("Number of entries: %u (%u)", count, i)
 				return NULL;
 			}

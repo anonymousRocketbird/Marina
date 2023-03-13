@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <pthread.h>
 
-#include <tofinopd/qoe_switch/pd/pd.h>
+#include <tofinopd/marina_data_plane/pd/pd.h>
 
 #include "dp_api.h"
 

@@ -2,7 +2,7 @@
 #define LOW_LEVEL_LIB_DP_API_H
 
 #include <pipe_mgr/pipe_mgr_intf.h>
-#include <tofinopd/qoe_switch/pd/pd.h>
+#include <tofinopd/marina_data_plane/pd/pd.h>
 
 #include "../datastructures/structs.h"
 #include "../config.h"

@@ -3,7 +3,7 @@ project(controller C)
 
 set(CMAKE_C_STANDARD 11)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror -pthread")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -pthread")
 #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=undefined")
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -Og -ggdb -fno-eliminate-unused-debug-symbols")
 set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -flto -march=native -fno-semantic-interposition")
@@ -31,7 +31,7 @@ set(controller_source_files
         controller/datastructures/dns_ringbuffer.c
         controller/datastructures/dns_hashtable.c
         controller/logging/statistics.c
-        )
+        controller/runtime_config/runtime_config.h controller/runtime_config/runtime_config.c)
 
 
 add_library(controller SHARED

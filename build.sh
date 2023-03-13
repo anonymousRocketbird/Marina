@@ -56,7 +56,7 @@ CLIENT_PATH=~/INSERT_DEV_MACHINE_FOLDER_PATH(P4_Controller)/
 if [[ ${SDE} ]]; then
     TOFINO_HEADER_SRC=${SDE}/install/include/
     TOFINO_HEADER_TARGET=${SERVER_PATH}/controller/tofino_include/
-    BUILD_PATH=${SDE}/build/p4-build/qoe_switch/tofino/qoe_switch/
+    BUILD_PATH=${SDE}/build/p4-build/marina_data_plane/tofino/marina_data_plane/
 
     if [[ "${BUILD_TEST}" ]]; then
         echo "Compiling P4 test script"
@@ -72,7 +72,7 @@ if [[ ${SDE} ]]; then
 
     if [[ -z "${NO_BUILD}" ]]; then
         echo "Compiling P4 program"
-        P4FLAGS=--parser-timing-reports ${SDE}/p4_build_ab_840.sh -p ${SERVER_PATH}/p4/qoe_switch.p4
+        P4FLAGS=--parser-timing-reports ${SDE}/p4_build_ab_840.sh -p ${SERVER_PATH}/p4/marina_data_plane.p4
     fi
     if [[ -z "${NO_WARNING}" ]]; then
         echo "WARNING: Could not rebuild thrift api, please do this on the dev machine"
@@ -82,7 +82,7 @@ else
     SDE="/home/USERNAME_HERE/sde"
     TOFINO_HEADER_SRC=${SDE}/install/include/
     TOFINO_HEADER_TARGET=${CLIENT_PATH}/controller/tofino_include/
-    BUILD_PATH=${SDE}/build/p4-build/qoe_switch/tofino/qoe_switch/
+    BUILD_PATH=${SDE}/build/p4-build/marina_data_plane/tofino/marina_data_plane/
 
     echo "Calling server"
     ssh ${TARGET} "bash -l ${SERVER_PATH}/build.sh --no-warning ${NO_BUILD} ${BUILD_TEST} ${BUILD_FORWARD}"

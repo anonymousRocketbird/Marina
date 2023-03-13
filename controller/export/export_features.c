@@ -48,7 +48,7 @@ typedef struct __attribute__((__packed__)) {
 #endif
 }
 
-void print_header(FILE *file, feature_register_t **features) {
+void print_header(FILE *file, feature_register_t* features[NUM_FEATURES]) {
 	// First line is timestamp
 	struct timespec ts;
 	if (clock_gettime(CLOCK_REALTIME, &ts) != 0) {
@@ -73,7 +73,7 @@ void print_header(FILE *file, feature_register_t **features) {
 #endif
 }
 
-void print_flow_data(FILE *file, session_hashtable_t *hashtable, feature_register_t **features, char uuid_mapping_copy[FEATURE_SIZE][UUID_STR_LEN]) {
+void print_flow_data(FILE *file, session_hashtable_t *hashtable, feature_register_t* features[NUM_FEATURES], char uuid_mapping_copy[FEATURE_SIZE][UUID_STR_LEN]) {
 	uint32_t num_flows = 0;
 
 	// Make a linear search over the whole hashtable entry index.

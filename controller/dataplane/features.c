@@ -23,9 +23,9 @@ feature_register_t register_count = {
 		.on_egress = pkt_count_reg_on_egress,
 		.table_hdl = pkt_count_reg_handle,
 		.process_register = process_and_age_feature,
-		.read_fn = p4_pd_qoe_switch_register_range_read_pkt_count_reg,
-		.write_fn = p4_pd_qoe_switch_register_write_pkt_count_reg,
-		.reset_fn = p4_pd_qoe_switch_register_reset_all_pkt_count_reg,
+		.read_fn = p4_pd_marina_data_plane_register_range_read_pkt_count_reg,
+		.write_fn = p4_pd_marina_data_plane_register_write_pkt_count_reg,
+		.reset_fn = p4_pd_marina_data_plane_register_reset_all_pkt_count_reg,
 };
 feature_register_t register_size_log = {
 		.reg_id = SIZE_LOG_REG,
@@ -33,9 +33,9 @@ feature_register_t register_size_log = {
 		.on_egress = size_log_reg_on_egress,
 		.table_hdl = size_log_reg_handle,
 		.process_register = process_feature,
-		.read_fn = p4_pd_qoe_switch_register_range_read_size_log_reg,
-		.write_fn = p4_pd_qoe_switch_register_write_size_log_reg,
-		.reset_fn = p4_pd_qoe_switch_register_reset_all_size_log_reg,
+		.read_fn = p4_pd_marina_data_plane_register_range_read_size_log_reg,
+		.write_fn = p4_pd_marina_data_plane_register_write_size_log_reg,
+		.reset_fn = p4_pd_marina_data_plane_register_reset_all_size_log_reg,
 };
 feature_register_t register_size_log_square = {
 		.reg_id = SIZE_LOG_SQUARE_REG,
@@ -43,9 +43,9 @@ feature_register_t register_size_log_square = {
 		.on_egress = size_log_square_reg_on_egress,
 		.table_hdl = size_log_square_reg_handle,
 		.process_register = process_feature,
-		.read_fn = p4_pd_qoe_switch_register_range_read_size_log_square_reg,
-		.write_fn = p4_pd_qoe_switch_register_write_size_log_square_reg,
-		.reset_fn = p4_pd_qoe_switch_register_reset_all_size_log_square_reg,
+		.read_fn = p4_pd_marina_data_plane_register_range_read_size_log_square_reg,
+		.write_fn = p4_pd_marina_data_plane_register_write_size_log_square_reg,
+		.reset_fn = p4_pd_marina_data_plane_register_reset_all_size_log_square_reg,
 };
 
 feature_register_t register_size_log_cube = {
@@ -54,9 +54,9 @@ feature_register_t register_size_log_cube = {
 		.on_egress = size_log_cube_reg_on_egress,
 		.table_hdl = size_log_cube_reg_handle,
 		.process_register = process_feature,
-		.read_fn = p4_pd_qoe_switch_register_range_read_size_log_cube_reg,
-		.write_fn = p4_pd_qoe_switch_register_write_size_log_cube_reg,
-		.reset_fn = p4_pd_qoe_switch_register_reset_all_size_log_cube_reg,
+		.read_fn = p4_pd_marina_data_plane_register_range_read_size_log_cube_reg,
+		.write_fn = p4_pd_marina_data_plane_register_write_size_log_cube_reg,
+		.reset_fn = p4_pd_marina_data_plane_register_reset_all_size_log_cube_reg,
 };
 
 feature_register_t register_iat_log = {
@@ -65,9 +65,9 @@ feature_register_t register_iat_log = {
 		.on_egress = iat_log_reg_on_egress,
 		.table_hdl = iat_log_reg_handle,
 		.process_register = process_feature,
-		.read_fn = p4_pd_qoe_switch_register_range_read_iat_log_reg,
-		.write_fn = p4_pd_qoe_switch_register_write_iat_log_reg,
-		.reset_fn = p4_pd_qoe_switch_register_reset_all_iat_log_square_reg,
+		.read_fn = p4_pd_marina_data_plane_register_range_read_iat_log_reg,
+		.write_fn = p4_pd_marina_data_plane_register_write_iat_log_reg,
+		.reset_fn = p4_pd_marina_data_plane_register_reset_all_iat_log_square_reg,
 };
 
 //feature_register_t register_iat_log_max = {
@@ -77,9 +77,9 @@ feature_register_t register_iat_log = {
 //		.table_hdl = iat_log_max_reg_handle,
 //		.register_width = REG_U8,
 //		.process_register = process_feature_val_uint8,
-//		.read8_fn = p4_pd_qoe_switch_register_range_read_iat_log_max_reg,
-//		.write8_fn = p4_pd_qoe_switch_register_write_iat_log_max_reg,
-//		.reset_fn = p4_pd_qoe_switch_register_reset_all_iat_log_max_reg,
+//		.read8_fn = p4_pd_marina_data_plane_register_range_read_iat_log_max_reg,
+//		.write8_fn = p4_pd_marina_data_plane_register_write_iat_log_max_reg,
+//		.reset_fn = p4_pd_marina_data_plane_register_reset_all_iat_log_max_reg,
 //};
 
 //feature_register_t register_iat_log_min = {
@@ -89,9 +89,9 @@ feature_register_t register_iat_log = {
 //		.table_hdl = iat_log_min_reg_handle,
 //		.register_width = REG_U8,
 //		.process_register = process_feature_val_uint8,
-//		.read8_fn = p4_pd_qoe_switch_register_range_read_iat_log_min_reg,
-//		.write8_fn = p4_pd_qoe_switch_register_write_iat_log_min_reg,
-//		.reset_fn = p4_pd_qoe_switch_register_reset_all_iat_log_min_reg,
+//		.read8_fn = p4_pd_marina_data_plane_register_range_read_iat_log_min_reg,
+//		.write8_fn = p4_pd_marina_data_plane_register_write_iat_log_min_reg,
+//		.reset_fn = p4_pd_marina_data_plane_register_reset_all_iat_log_min_reg,
 //};
 
 feature_register_t register_iat_log_square = {
@@ -100,9 +100,9 @@ feature_register_t register_iat_log_square = {
 		.on_egress = iat_log_square_reg_on_egress,
 		.table_hdl = iat_log_square_reg_handle,
 		.process_register = process_feature,
-		.read_fn = p4_pd_qoe_switch_register_range_read_iat_log_square_reg,
-		.write_fn = p4_pd_qoe_switch_register_write_iat_log_square_reg,
-		.reset_fn = p4_pd_qoe_switch_register_reset_all_iat_log_square_reg,
+		.read_fn = p4_pd_marina_data_plane_register_range_read_iat_log_square_reg,
+		.write_fn = p4_pd_marina_data_plane_register_write_iat_log_square_reg,
+		.reset_fn = p4_pd_marina_data_plane_register_reset_all_iat_log_square_reg,
 };
 
 feature_register_t register_iat_log_cube = {
@@ -111,9 +111,9 @@ feature_register_t register_iat_log_cube = {
 		.on_egress = iat_log_cube_reg_on_egress,
 		.table_hdl = iat_log_cube_reg_handle,
 		.process_register = process_feature,
-		.read_fn = p4_pd_qoe_switch_register_range_read_iat_log_cube_reg,
-		.write_fn = p4_pd_qoe_switch_register_write_iat_log_cube_reg,
-		.reset_fn = p4_pd_qoe_switch_register_reset_all_iat_log_cube_reg,
+		.read_fn = p4_pd_marina_data_plane_register_range_read_iat_log_cube_reg,
+		.write_fn = p4_pd_marina_data_plane_register_write_iat_log_cube_reg,
+		.reset_fn = p4_pd_marina_data_plane_register_reset_all_iat_log_cube_reg,
 };
 
 feature_register_t register_last_timestamp = {
@@ -121,9 +121,9 @@ feature_register_t register_last_timestamp = {
 		.on_egress = iat_last_timestamp_reg_on_egress,
 		.table_hdl = iat_last_timestamp_reg_handle,
 		.process_register = NULL,
-		.read_fn = p4_pd_qoe_switch_register_range_read_iat_last_timestamp_reg,
-		.write_fn = p4_pd_qoe_switch_register_write_iat_last_timestamp_reg,
-		.reset_fn = p4_pd_qoe_switch_register_reset_all_iat_last_timestamp_reg,
+		.read_fn = p4_pd_marina_data_plane_register_range_read_iat_last_timestamp_reg,
+		.write_fn = p4_pd_marina_data_plane_register_write_iat_last_timestamp_reg,
+		.reset_fn = p4_pd_marina_data_plane_register_reset_all_iat_last_timestamp_reg,
 };
 
 //feature_register_t register_tcp_retransmission = {
@@ -132,9 +132,9 @@ feature_register_t register_last_timestamp = {
 //		.on_egress = ret_count_reg_on_egress,
 //		.table_hdl = ret_count_reg_handle,
 //		.process_register = process_feature,
-//		.read_fn = p4_pd_qoe_switch_register_range_read_ret_count_reg,
-//		.write_fn = p4_pd_qoe_switch_register_write_ret_count_reg,
-//		.reset_fn = p4_pd_qoe_switch_register_reset_all_ret_count_reg,
+//		.read_fn = p4_pd_marina_data_plane_register_range_read_ret_count_reg,
+//		.write_fn = p4_pd_marina_data_plane_register_write_ret_count_reg,
+//		.reset_fn = p4_pd_marina_data_plane_register_reset_all_ret_count_reg,
 //};
 
 volatile bool dataplane_new_features;

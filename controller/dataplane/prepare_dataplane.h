@@ -3,7 +3,7 @@
 
 #include "../config.h"
 
-#include <tofinopd/qoe_switch/pd/pd.h>
+#include <tofinopd/marina_data_plane/pd/pd.h>
 
 extern int16_t DEVPORT_MAPPING[MAX_DEV_PORT_ID];
 
